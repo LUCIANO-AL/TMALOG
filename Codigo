@@ -1,0 +1,555 @@
+#include <Excel.au3>
+#include <Constants.au3>
+#include <IE.au3>
+
+
+
+Local $iAnswer = MsgBox(BitOR($MB_YESNO, $MB_SYSTEMMODAL), "TMALOG ", "A PLANILHA DE MEDIÇÕES JA ESTA ATUALIZADA COM A ESTRUTURA DE SUA EQUIPE?")
+
+If $iAnswer = 7 Then
+    $abrir = WinWait ("Microsoft Excel - TMA")
+    WinActivate ($abrir)
+    Exit
+EndIf
+
+
+Global $operador = InputBox ("TMALOG", "INFORME A QUANTIDADE DE REPRESENTANTE QUE DESEJA EFETUAR A MEDIÇÃO:")
+
+outraopcao()
+
+
+Func tma()
+
+$abrir = WinWait ("TMA - Excel")
+WinActivate ($abrir)
+Send ("^{home}")
+Send ("{down}")
+
+Global $var = 0, $var2 = 0
+HotKeySet("{esc}", "sair")
+
+Local $iCount = 1
+
+   WHILE $iCount <= $operador
+
+if $var2 = 1 Then
+   Send("sair")
+EndIf
+
+$abrir = WinWait ("TMA - Excel")
+WinActivate ($abrir)
+$c = Send ("^{c}")
+
+$abrircsp = WinWait ("CSP 6.0 - Windows Internet Explorer")
+WinActivate ($abrircsp)
+Send("^{0}")
+
+idbtn()
+
+tma2()
+
+$abrir = WinWait ("TMA - Excel")
+WinActivate ($abrir)
+Send ("{tab 2}")
+Send ("{delete}")
+Send ("{f2}")
+Send ("^{v}")
+Send ("{enter}")
+
+$iCount =  $iCount + 1
+
+WEnd
+
+$abrir = WinWait ("TMA - Excel")
+WinActivate ($abrir)
+
+    Send ("^{home}")
+                Send ("{tab 2}")
+                Send("!{down}")
+                Send ("{tab 2}")
+                Send("{space}")
+
+
+   MsgBox (0,"TMALOG", "MEDIÇÃO DE TMA TERMINA", 3)
+
+EndFunc
+
+
+
+Func tlog()
+
+$abrir = WinWait ("TMA - Excel")
+WinActivate ($abrir)
+Send ("^{home}")
+Send ("{down}")
+
+Global $var = 0, $var2 = 0
+HotKeySet("{esc}", "sair")
+
+Local $iCount = 1
+
+   WHILE $iCount <= $operador
+
+if $var2 = 1 Then
+   Send("sair")
+EndIf
+
+$abrir = WinWait ("TMA - Excel")
+WinActivate ($abrir)
+$c = Send ("^{c}")
+
+$abrir = WinWait ("CSP 6.0 - Windows Internet Explorer")
+WinActivate ($abrir)
+Send("^{0}")
+;Sleep(800)
+
+idbtn()
+
+tlog2()
+
+$abrir = WinWait ("TMA - Excel")
+WinActivate ($abrir)
+Send ("{tab 7}")
+Send ("{delete}")
+Send ("{f2}")
+Send ("^{v}")
+Send("{enter}")
+
+$iCount =  $iCount + 1
+
+
+WEnd
+
+$abrir = WinWait ("TMA - Excel")
+WinActivate ($abrir)
+
+   Send ("^{home}")
+                Send ("{tab 7}")
+                Send("!{down}")
+                Send ("{tab 2}")
+                Send("{space}")
+  MsgBox (0,"TMALOG", "MEDIÇÃO DE TEMPO LOGADO CONCLUIDA", 3)
+EndFunc
+
+
+Func pausa()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+Send ("^{home}")
+Send ("{down}")
+
+Global $var = 0, $var2 = 0
+HotKeySet("{esc}", "sair")
+
+Local $iCount = 1
+   WHILE $iCount <= $operador
+
+if $var2 = 1 Then
+   Send("sair")
+EndIf
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+$c = Send ("^{c}")
+
+$abrir = WinWait ("CSP 6.0 - Windows Internet Explorer")
+WinActivate ($abrir)
+Send("^{0}")
+
+idbtn()
+
+pausa2()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+Send ("{tab 6}")
+Send ("{delete}")
+Send ("{f2}")
+Send ("^{v}")
+Send ("{enter}")
+
+$iCount =  $iCount + 1
+
+WEnd
+
+MsgBox (0,"TMALOG", "MEDIÇÃO DE PAUSA CONCLUIDA", 3)
+
+
+EndFunc
+
+Func quantpausa()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+Send ("^{home}")
+Send ("{down}")
+
+Global $var = 0, $var2 = 0
+HotKeySet("{esc}", "sair")
+
+Local $iCount = 1
+   WHILE $iCount <= $operador
+
+if $var2 = 1 Then
+   Send("sair")
+EndIf
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+$c = Send ("^{c}")
+
+$abrir = WinWait ("CSP 6.0 - Windows Internet Explorer")
+WinActivate ($abrir)
+Send("^{0}")
+
+idbtn()
+
+qpausa()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+Send ("{tab 5}")
+Send ("{delete}")
+Send ("{f2}")
+Send ("^{v}")
+Send ("{enter}")
+
+$iCount =  $iCount + 1
+
+WEnd
+MsgBox (0,"TMALOG", "MEDIÇÃO DA QUANTIDADE DE PAUSA CONCLUIDA", 3)
+
+EndFunc
+
+
+Func nchamada()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+Send ("^{home}")
+Send ("{down}")
+
+Global $var = 0, $var2 = 0
+HotKeySet("{esc}", "sair")
+
+Local $iCount = 1
+
+   WHILE $iCount <= $operador
+
+if $var2 = 1 Then
+   Send("sair")
+EndIf
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+$c = Send ("^{c}")
+
+$abrir = WinWait ("CSP 6.0 - Windows Internet Explorer")
+WinActivate ($abrir)
+Send("^{0}")
+;Sleep(800)
+
+idbtn()
+
+ncham()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+Send ("{tab 8}")
+Send ("{delete}")
+Send ("{f2}")
+Send ("^{v}")
+Send ("{enter}")
+
+$iCount =  $iCount + 1
+
+
+WEnd
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+    Send ("^{home}")
+                Send ("{tab 7}")
+                Send("!{down}")
+                Send ("{tab 2}")
+                Send("{space}")
+                MsgBox (0,"TMALOG", "MEDIÇÃO Do NUMERO DE CHAMADAS CONCLUIDA",3)
+
+EndFunc
+
+ Func nchamareal()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+Send ("^{home}")
+Send ("{down}")
+
+Global $var = 0, $var2 = 0
+HotKeySet("{esc}", "sair")
+
+Local $iCount = 1
+
+   WHILE $iCount <= $operador
+
+if $var2 = 1 Then
+   Send("sair")
+EndIf
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+$c = Send ("^{c}")
+
+$abrir = WinWait ("CSP 6.0 - Windows Internet Explorer")
+WinActivate ($abrir)
+Send("^{0}")
+;Sleep(800)
+
+idbtn()
+
+fnchreal()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+Send ("{tab 10}")
+Send ("{delete}")
+Send ("{f2}")
+Send ("^{v}")
+Send ("{enter}")
+
+$iCount =  $iCount + 1
+
+
+WEnd
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+    Send ("^{home}")
+                Send ("{tab 7}")
+                Send("!{down}")
+                Send ("{tab 2}")
+                Send("{space}")
+                MsgBox (0,"TMALOG", "MEDIÇÃO Do NUMERO DE CHAMADAS CONCLUIDA",3)
+
+EndFunc
+
+
+Func ntran()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+Send ("^{home}")
+Send ("{down}")
+
+Global $var = 0, $var2 = 0
+HotKeySet("{esc}", "sair")
+
+Local $iCount = 1
+
+   WHILE $iCount <= $operador
+
+if $var2 = 1 Then
+   Send("sair")
+EndIf
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+$c = Send ("^{c}")
+
+$abrir = WinWait ("CSP 6.0 - Windows Internet Explorer")
+WinActivate ($abrir)
+Send("^{0}")
+
+idbtn()
+
+ntr()
+
+$abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+
+Send ("{tab 9}")
+Send ("{delete}")
+Send ("{f2}")
+Send ("^{v}")
+Send ("{enter}")
+
+$iCount =  $iCount + 1
+
+
+WEnd
+
+
+
+  $abrir = WinWait ("Microsoft Excel - TMA")
+WinActivate ($abrir)
+
+   Send ("^{home}")
+                Send ("{tab 7}")
+                Send("!{down}")
+                Send ("{tab 2}")
+                Send("{space}")
+
+MsgBox (0,"TMALOG", "MEDIÇÃO DE TRANSFERÊNCIA CONCLUIDA", 3)
+
+If $iAnswer = 6 Then
+     outraopcao()
+
+EndIf
+   EndFunc
+
+
+Func outraopcao()
+
+   Local  $sMsg = InputBox ("TMALOG", "INFORME QUAL INDICADOR VOCÊ DESEJA MEDIR: [1]TMA        [2]TEMPO LOGADO        [3]TEMPO EM PAUSA                                  [4]Nº DE PAUSAS                                               [5]Nº DE CHAMADAS                                 [6]Nº DE TRANSFERENCIAS                       [7]TMA E TEMPO LOG                                     [8]NºDE PAUSA E TEMPO EM PAUSA [9]TODOS                                                    [10]Nº DE CHAMADAS REALIZADAS", "", "", "", 250)
+
+Switch $sMsg
+   Case 1
+        tma()
+   Case 2
+        tlog()
+   Case 3
+        pausa()
+   Case 4
+       quantpausa()
+   Case 5
+       nchamada()
+   Case 6
+                   ntran()
+   Case 7
+                   tma()
+                   tlog()
+   Case 8
+                    pausa()
+                               quantpausa()
+   Case 9
+                  tma()
+                  tlog()
+                  pausa()
+                  quantpausa()
+                  nchamada()
+   Case 10
+                  nchamareal()
+                Case Else
+
+        $sMsg = "AS OPÇÕES DE MEDIÇÃO ESTÃO COMPRENDIDAS DE 1 A 4"
+     EndSwitch
+
+   EndFunc
+
+
+
+Func idbtn()
+
+Sleep (900)
+MouseClick("left", 137, 155, 2)
+Send ("^{v}")
+
+Sleep (500)
+MouseClick("left", 381, 156, 1)
+
+   EndFunc
+
+Func tlog2()
+   Sleep(200)
+   MouseClick("left", 1130, 243, 3)
+   Sleep (200)
+   Send ("^{c}")
+
+   MouseClick("left", 1130, 243, 1)
+   Sleep (200)
+   Send ("^{c}")
+
+   MouseClick("left", 137, 155, 2)
+   Send ("{delete}")
+
+EndFunc
+
+Func tma2()
+Sleep(200)
+MouseClick("left", 241, 533, 3)
+Sleep (200)
+Send ("^{c}")
+
+Sleep(200)
+MouseClick("left", 241, 533, 1)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 137, 155, 2)
+   Send ("{delete}")
+
+EndFunc
+
+Func pausa2()
+   Sleep(200)
+   MouseClick("left", 242, 373, 3)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 242, 373, 1)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 137, 155, 2)
+   Send ("{delete}")
+EndFunc
+
+Func qpausa()
+   Sleep(200)
+   MouseClick("left", 224, 242, 3)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 224, 242, 1)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 137, 155, 2)
+   Send ("{delete}")
+   EndFunc
+
+   Func ncham()
+                  Sleep(200)
+   MouseClick("left", 223, 216, 3)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 223, 216, 1)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 137, 155, 2)
+   Send ("{delete}")
+EndFunc
+
+Func fnchreal()
+    Sleep(200)
+   MouseClick("left", 668, 301, 3)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 668, 301, 1)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 137, 155, 2)
+   Send ("{delete}")
+   EndFunc
+
+Func ntr()
+    Sleep(200)
+   MouseClick("left", 668, 267, 3)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 668, 266, 1)
+Sleep (200)
+Send ("^{c}")
+
+MouseClick("left", 137, 155, 2)
+   Send ("{delete}")
+   EndFunc
+
+Func sair()
+  Exit
+EndFunc
